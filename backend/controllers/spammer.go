@@ -1,17 +1,17 @@
 package controllers
 
 import (
-	"github.com/iota-tangle-io/iota-spamalot.go"
+	"fmt"
+	"github.com/coreos/bbolt"
 	"github.com/cwarner818/giota"
+	"github.com/iota-tangle-io/dtlg/backend/utilities"
+	"github.com/iota-tangle-io/iota-spamalot.go"
+	"gopkg.in/inconshreveable/log15.v2"
+	"math/rand"
+	"runtime"
+	"strings"
 	"sync"
 	"time"
-	"math/rand"
-	"fmt"
-	"gopkg.in/inconshreveable/log15.v2"
-	"github.com/iota-tangle-io/dtlg/backend/utilities"
-	"runtime"
-	"github.com/coreos/bbolt"
-	"strings"
 )
 
 const DefaultMessage = "DISTRIBUTED9TANGLE9LOAD9GENERATOR"
@@ -89,7 +89,7 @@ func (ctrl *SpammerCtrl) createSpammer() *spamalot.Spammer {
 
 	powFunc := giota.GetAvailablePoWFuncs()[ctrl.powType]
 	spammer, _ := spamalot.New(
-		spamalot.WithMWM(int64(14)),
+		spamalot.WithMWM(int64(0)),
 		spamalot.WithDepth(int64(depth)),
 		spamalot.ToAddress(address),
 		spamalot.WithTag(tag),
